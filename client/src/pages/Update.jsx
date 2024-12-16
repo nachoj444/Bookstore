@@ -77,7 +77,7 @@ const Update = () => {
             if (file) {
                 const formData = new FormData();
                 formData.append("cover", file);
-                const uploadRes = await axios.post("http://localhost:8800/upload", formData);
+                const uploadRes = await axios.post("http://host:8800/upload", formData);
                 coverUrl = uploadRes.data.imageUrl;  // Get the uploaded image URL
             }
 
