@@ -12,7 +12,6 @@ const Books = () => {
             try{
                 const res = await axios.get("http://localhost:8800/books")
                 setBooks(res.data);
-               // console.log(res)
             }catch(err){
                 console.log(err);
             }
@@ -28,7 +27,6 @@ const Books = () => {
             console.log(err)
         }
     }
-// Example in Books.jsx
 const BASE_URL = "http://localhost:8800";  // Define the base URL
 
 return (

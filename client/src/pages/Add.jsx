@@ -9,7 +9,7 @@ const Add = () => {
         price: null,
         cover: ""
     });
-    const [file, setFile] = useState(null);  // <-- To store the uploaded image
+    const [file, setFile] = useState(null);// <-- To store the uploaded image
 
     const navigate = useNavigate();
 
@@ -18,31 +18,31 @@ const Add = () => {
     };
 
     const handleFileChange = (e) => {
-        setFile(e.target.files[0]);  // <-- Store selected image file
+        setFile(e.target.files[0]);// <-- Store selected image file
     };
 
     const handleClick = async (e) => {
         e.preventDefault();
-        console.log("Add button clicked");  // Should log when button is clicked
+        console.log("Add button clicked");// Should log when button is clicked
     
         try {
             let coverUrl = "";
             if (file) {
-                console.log("File selected:", file);  // Debugging check
+                console.log("File selected:", file);// Debugging check
                 const formData = new FormData();
                 formData.append("cover", file);
                 const uploadRes = await axios.post("http://localhost:8800/upload", formData);
                 coverUrl = uploadRes.data.imageUrl;
-                console.log("Uploaded image URL:", coverUrl);  // Log the URL
+                console.log("Uploaded image URL:", coverUrl);// Log the URL
             }
             await axios.post("http://localhost:8800/books", {
                 ...book,
                 cover: coverUrl
             });
-            console.log("Book added:", { ...book, cover: coverUrl });  // Log the book data
+            console.log("Book added:", { ...book, cover: coverUrl });// Log the book data
             navigate("/");
         } catch (err) {
-            console.log("Error adding book:", err);  // Log any errors
+            console.log("Error adding book:", err);// Log any errors
         }
     };
     
@@ -53,9 +53,7 @@ const Add = () => {
             <input type="text" placeholder="title" onChange={handleChange} name="title" />
             <input type="text" placeholder="author" onChange={handleChange} name="description" />
             <input type="number" placeholder="price" onChange={handleChange} name="price" />
-            <input type="file" onChange={handleFileChange} />  {/* <-- Image upload input */}
-
-            {/* Replace your current button with this */}
+            <input type="file" onChange={handleFileChange} /> 
             <button 
                type="button" 
                className="formButton" 
@@ -70,44 +68,3 @@ const Add = () => {
 };
 
 export default Add;
-
-// import axios from "axios";
-// import React from "react";
-// import { useState } from "react";
-// import { Link, useNavigate } from "react-router-dom";
-
-// const Add = () => {
-//     const[book,setBook] = useState({
-//         title:"",
-//         description:"",
-//         price:null,
-//         cover: "",
-
-//     });
-
-//     const navigate = useNavigate()
-//     const handleChange = (e) =>{
-//         setBook(prev=>({...prev, [e.target.name]: e.target.value}))
-//     }
-//     const handleClick = async e =>{
-//         e.preventDefault()
-//         try{
-//             await axios.post("http://localhost:8800/books", book)
-//             navigate("/");
-//         }catch(err){
-//             console.log(err);
-//         }
-//     }
-//     console.log(book);
-//    return (
-//     <div className='form'>
-//         <h1>Add New Book</h1>
-//         <input type = "text" placeholder="title" onChange={handleChange} name = "title"/>
-//         <input type = "text" placeholder="author" onChange={handleChange} name = "description"/>
-//         <input type = "number" placeholder="price" onChange={handleChange} name = "price"/>
-//         <input type = "text" placeholder="cover" onChange={handleChange} name = "cover"/>
-//         <button className = "formButton" onClick = {handleClick}>Add</button>
-//     </div>
-//    )
-// }
-// export default Add 

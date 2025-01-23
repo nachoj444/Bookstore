@@ -3,36 +3,14 @@ import mysql from "mysql2";
 import cors from "cors";
 import multer from "multer"; // Ensure multer is imported
 import path from "path";     // For file path management
-import dotenv from "dotenv";
-
 
 const app = express();
 
-// const db = mysql.createConnection({
-//     host: "localhost",
-//     user: "root",
-//     password: "Nacho110403!",
-//     database: "test",
-// });
-const dbUrl = process.env.JAWSDB_URL;
-if (!dbUrl) {
-  console.error("JAWSDB_URL environment variable is not set.");
-  process.exit(1);
-}
-
 const db = mysql.createConnection({
-  host: dbUrl.split('@')[1].split(':')[0],  // Extract host
-  user: dbUrl.split(':')[1].split('//')[1],  // Extract user
-  password: dbUrl.split(':')[2].split('@')[0],  // Extract password
-  database: dbUrl.split('/')[3]  // Extract database name
-});
-
-db.connect((err) => {
-  if (err) {
-    console.error("Database connection failed:", err.message);
-    return;
-  }
-  console.log("Connected to JawsDB MySQL database.");
+    host: "localhost",
+    user: "root",
+    password: "Nacho110403!",
+    database: "test",
 });
 
 app.use(express.json());
@@ -113,9 +91,7 @@ app.put("/books/:id", (req, res) => {
     });
 });
 
-const PORT = process.env.PORT || 8800; // Use the port provided by Heroku or default to 8800 locally
-
-app.listen(PORT, () => {
-    console.log(`Server is running on port ${PORT}`);
+app.listen(8800, () => {
+    console.log("Connected to backend");
 });
 
